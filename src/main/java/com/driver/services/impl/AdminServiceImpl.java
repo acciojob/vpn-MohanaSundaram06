@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
         if(!countries.contains(countryName.toUpperCase())) throw new Exception("Country not found");
 
         Country country =new Country();
-        country.setOriginalCountry(CountryName.valueOf(countryName));
+        country.setCountryName(CountryName.valueOf(countryName));
         country.setCode(CountryName.valueOf(countryName).toCode());
 
         ServiceProvider serviceProvider = serviceProviderRepository1.findById(serviceProviderId).get();

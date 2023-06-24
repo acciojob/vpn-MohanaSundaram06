@@ -31,14 +31,14 @@ public class UserServiceImpl implements UserService {
             throw new Exception("Country not found");
         Country country=new Country();
         CountryName countryName1=CountryName.valueOf(countryName.toUpperCase());
-        country.setOriginalCountry(countryName1);
+        country.setCountryName(countryName1);
         country.setCode(countryName1.toCode());
         User user=new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setConnected(false);
         user.setMaskedIp(null);
-        user.setCountry(country);
+        user.setOriginalCountry(country);
         user=userRepository3.save(user);
         String originalIp=countryName1.toCode()+"."+user.getId();
         user.setOriginalIp(originalIp);
