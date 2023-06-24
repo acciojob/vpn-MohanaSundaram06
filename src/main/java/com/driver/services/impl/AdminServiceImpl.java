@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
         serviceProvider.setName(providerName);
         serviceProvider.setAdmin(admin);
 
-        admin.getServiceProviderList().add(serviceProvider);
+        admin.getServiceProviders().add(serviceProvider);
 
         return adminRepository1.save(admin);
     }
@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
         if(!countries.contains(countryName.toUpperCase())) throw new Exception("Country not found");
 
         Country country =new Country();
-        country.setCountryName(CountryName.valueOf(countryName));
+        country.setOriginalCountry(CountryName.valueOf(countryName));
         country.setCode(CountryName.valueOf(countryName).toCode());
 
         ServiceProvider serviceProvider = serviceProviderRepository1.findById(serviceProviderId).get();

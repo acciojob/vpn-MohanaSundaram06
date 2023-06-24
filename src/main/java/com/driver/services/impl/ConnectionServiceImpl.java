@@ -24,7 +24,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         User user=userRepository2.findById(userId).get();
         if(user.getConnected()==true)
             throw new Exception("Already connected");
-        else if(user.getCountry().getCountryName().toString().equalsIgnoreCase(countryName))
+        else if(user.getCountry().getOriginalCountry().toString().equalsIgnoreCase(countryName))
             return user;
         List<ServiceProvider> serviceProviders=user.getServiceProviderList();
         ServiceProvider lowestServiceProvider=null;
@@ -32,7 +32,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         for(ServiceProvider serviceProvider:serviceProviders){
             List<Country> countries=serviceProvider.getCountryList();
             for(Country country:countries){
-                if(countryName.equalsIgnoreCase(country.getCountryName().toString())){
+                if(countryName.equalsIgnoreCase(country.getOriginalCountry().toString())){
                     if(lowestServiceProvider==null || lowestId > serviceProvider.getId()){
                         lowestId=serviceProvider.getId();
                         lowestServiceProvider=serviceProvider;
@@ -93,7 +93,7 @@ public class ConnectionServiceImpl implements ConnectionService {
             }
         }
         else{
-            receiverCountryName=receiver.getCountry().getCountryName();
+            receiverCountryName=receiver.getCountry().getOriginalCountry();
         }
         User user=null;
         try{
